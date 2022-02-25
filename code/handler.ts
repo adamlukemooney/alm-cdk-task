@@ -66,7 +66,7 @@ async function handleRouteNotFound(
     event: APIGatewayProxyEvent,
     context: Context
 ): Promise<APIGatewayProxyResult> {
-    return jsonResponse(404, { error: 'route not found' })
+    return jsonResponse(HttpStatus.NotFound, { error: 'route not found' })
 }
 
 async function listFiles(
@@ -77,7 +77,7 @@ async function listFiles(
         Bucket: getS3BucketName()
     }).promise()
 
-    return jsonResponse(200, { files: result.Contents?.map(content => content.Key) })
+    return jsonResponse(HttpStatus.OK, { files: result.Contents?.map(content => content.Key) })
 }
 
 async function getFile(
