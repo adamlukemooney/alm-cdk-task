@@ -8,7 +8,6 @@ export class AlmCdkChallengeStack extends Stack {
     super(scope, id, props);
 
     const bucket = new S3.Bucket(this, 'alm-cdk-challenge-bucket', {
-      bucketName: 'alm-cdk-challenge-bucket',
       versioned: true,
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true
@@ -18,7 +17,6 @@ export class AlmCdkChallengeStack extends Stack {
       this,
       'alm-cdk-challenge-handler',
       {
-        functionName: 'alm-cdk-challenge-handler',
         environment: {
           S3_BUCKET: bucket.bucketName
         },

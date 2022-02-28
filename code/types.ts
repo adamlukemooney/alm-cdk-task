@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda";
 
-export type ApiGatewayProxyHandler = (event: APIGatewayProxyEvent, context: Context) => Promise<APIGatewayProxyResult>
+export type ApiGatewayProxyHandler = (event: APIGatewayProxyEvent) => Promise<APIGatewayProxyResult>
 
 export enum HttpStatus {
     OK = 200,
@@ -10,17 +10,6 @@ export enum HttpStatus {
     ServerError = 500,
 }
 
-export interface MethodHandlerMap {
-    [method: string]: ApiGatewayProxyHandler
-}
+export type MethodHandlerMap = Record<string, ApiGatewayProxyHandler>
 
-export interface ResourceHandlerMap {
-    [route: string]: MethodHandlerMap
-}
-
-export class ValidationError extends Error {
-    constructor(message: string) {
-      super(message);
-      this.name = "ValidationError";
-    }
-}
+export type ResourceHandlerMap = Record<string, MethodHandlerMap>
